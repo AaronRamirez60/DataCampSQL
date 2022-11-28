@@ -1,0 +1,170 @@
+Introduction to SQL 
+
+Quering the books table 
+-- Return all titles from the books table
+SELECT *
+FROM books; 
+
+-- Select title and author form the books table
+SELECT title, author
+FROM books; 
+
+-- Select all fields from the books table 
+SELECT * 
+FROM books;
+
+
+Make queries DISTINCT 
+-- Select unique authors form the books table 
+SELECT DISTINCT author
+FROM books; 
+
+-- Select unique authors and genre combinations from the books table
+SELECT DISTINCT auhtor, genre
+FROM books;
+
+
+Aliasing
+-- Alias author so that it becomes unique_author 
+SELECT DISTINCT author AS unique_author
+FROM books; 
+
+
+VIEWing your query
+-- Save the results of this query as a view called library_authors 
+CREATE VIEW library_authors AS 
+SELECT DISTINCT auhtor AS unique_author
+FROM books; 
+
+-- Select al columns from library_authors
+SELECT *
+FROM library_authors; 
+
+
+Limiting results
+-- Select the first 10 genres from books using PostgreSQL 
+SELECT genre
+FROM books 
+LIMIT 10; 
+
+
+Intermediate SQL 
+
+Practice with COUNT() 
+-- Count the number of records in the people table
+SELECT COUNT(*) AS count_records
+FROM people; 
+
+-- Count the number of birthdates in the people table 
+SELECT COUNT (birthdate) AS count_birthdate
+FROM people; 
+
+-- Count the languages and countries represented in the films table
+SELECT COUNT(language) AS count_languages, COUNT(country) AS count_countries
+FROM films; 
+
+
+SELECT DISTINCT 
+-- Return the unique countries from the films table 
+SELECT DISTINCT country 
+FROM films; 
+
+-- Count the distinct countries from the films table
+SELECT COUNT(DISTINCT country) AS count_distinct_countries 
+FROM films; 
+
+
+Debugging errors 
+-- Debug this code 
+SELECT certfication
+FROM films
+LIMIT 5; 
+
+Answer: 
+SELECT certfication
+FROM films
+LIMIT 5; 
+
+The field name "certification" was misspelled in the first code.
+
+-- Debug this code 
+SELECT film_id imdb_score num_votes
+FROM reviews; 
+
+Answer:
+SELECT film_id, imdb_score, num_votes
+FROM reviews; 
+
+There were no commas after "film_id" and "imdb_score". 
+
+-- Debug this code
+SELECT COUNNT(birthdate) AS count_birthdays
+FROM peeple; 
+
+Answer: 
+SELECT COUNT(birthdate) AS count_birthdays
+FROM people; 
+
+"COUNT" and "people" were misspelled in the bugged code.
+ 
+
+Formatting 
+-- Rewrite this query 
+select person_id, role from roles limit 10 
+
+Answer: 
+SELECT person_id, role
+FROM roles
+LIMIT 10; 
+
+
+Using WHERE with numbers 
+-- Select film_ids and imdb_score with an imdb_score over 7.0
+SELECT film_id, imdb_score
+FROM reviews
+WHERE imdb_score > 7.0;
+
+-- Select film_ids and facebook_likes for ten records with less than 1000 likes
+SELECT film_id, facebook_likes
+FROM reviews
+WHERE facebook_likes < 1000
+LIMIT 10;
+
+-- Count the records with at least 100,000 votes 
+SELECT COUNT(num_votes) AS films_over_100k_votes 
+FROM reviews
+WHERE num_votes >= 100000;
+
+
+Using WHERE with text 
+-- Count the Spanish-language films
+SELECT COUNT(language) AS count_spanish
+FROM films
+WHERE language = 'Spanish';
+
+
+Using AND
+-- Select the title and release_year for all German-language films released before 2000
+SELECT title, release_year
+FROM films
+WHERE language = 'German'
+AND release_year < 2000;
+
+-- Update the query to see all German-language films released after 2000 
+SELECT title, release_year
+FROM films
+WHERE release_year > 2000 
+AND language = 'Gemran';
+
+-- Select all records for German-language films released after 2000 and before 2010
+SELECT *
+FROm films
+WHERE language = 'German' AND release_year BETWEEN 2001 AND 2009;
+
+
+
+
+
+
+
+
